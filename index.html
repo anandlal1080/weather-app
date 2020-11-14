@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <div class="app-wrap">
+      <header>
+        <input
+          type="text"
+          autocomplete="off"
+          class="search-box"
+          placeholder="Search for a city..."
+        />
+      </header>
+      <main>
+        <section class="location">
+          <div class="city">Denver, CO</div>
+          <div class="date">Saturday, November 14th, 2020</div>
+        </section>
+        <div class="current">
+          <div class="temp">60<span>F</span></div>
+          <div class="weather">Sunny</div>
+          <div class="hi-low">45F / 65F</div>
+        </div>
+      </main>
+    </div>
+    <script src="/assets/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+  </body>
+</html>
