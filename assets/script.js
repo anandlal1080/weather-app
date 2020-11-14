@@ -7,14 +7,22 @@ const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
 function setQuery(evt) {
+
+    
     if (evt.keyCode == 13) {
-        getResults(searchbox.value);
-        $("#history").append($("<h5>").text(searchbox.value));
-        
-        document.getElementById("history").addEventListener("click", myFunction); 
-        
-        function myFunction() {
-          console.log(document.getElementById("history").innerText);
+        if (searchbox.value == "") {
+            return;
+            
+        } else {
+            
+            getResults(searchbox.value);
+            $("#history").append($("<h5>").text(searchbox.value));
+            
+            document.getElementById("history").addEventListener("click", myFunction); 
+            
+            function myFunction() {
+                console.log(document.getElementById("history").innerText);
+            }
         }
         
     }
