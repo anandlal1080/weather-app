@@ -43,6 +43,8 @@ function getResults(query) {
 function displayResults(weather) {
     lat = weather.coord.lat;
     lon = weather.coord.lon;
+    var iconcode =weather.weather[0].icon;
+    var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
   
     
     let city = document.querySelector('.location .city');
@@ -57,6 +59,7 @@ function displayResults(weather) {
     
     let weather_el = document.querySelector('.current .weather');
     weather_el.innerText = weather.weather[0].main;
+    $('#wicon').attr('src', iconurl);
     
     let humidity = document.querySelector('.humidity');
     humidity.innerText = "Humidity " + weather.main.humidity + "%";
@@ -71,7 +74,6 @@ function displayResults(weather) {
     
     function uvIndexFunc(uvi) {
         
-        console.log(uvi);
         let uvindex = document.querySelector('.uvindex ');
         uvindex.innerText = "UV Index " + uvi.value;
     }
