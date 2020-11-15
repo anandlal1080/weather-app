@@ -119,3 +119,13 @@ main {
   width: fit-content;
   margin-left: 10px;
 }
+.col {
+  color: #fff;
+  align-items: left;
+  background-color: rgba(172, 223, 243, 0.2);
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: 5px;
+  width: fit-content;
+  margin-left: 10px;
+}
