@@ -5,7 +5,8 @@ const api = {
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
-
+var lat = "";
+var lon = "";
 function setQuery(evt) {
 
     
@@ -33,11 +34,16 @@ function getResults(query) {
     fetch(`${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`)
     .then(weather => {
         return weather.json();
+        
+        
     }).then(displayResults);
     
 }
 
 function displayResults(weather) {
+    lat = weather.coord.lat;
+    lon = weather.coord.lon;
+  
     
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
@@ -58,6 +64,16 @@ function displayResults(weather) {
     let windspeed = document.querySelector('.windspeed');
     windspeed.innerText = "Windspeed " + weather.wind.speed+ "mph";
 
-    let uvindex = document.querySelector('.uvindex ');
-    uvindex.innerText = "Humidity " + weather.main.humidity + "%";
+    fetch(`${api.base}uvi?lat=${lat}&lon=${lon}&appid=${api.key}`)
+    .then(uvi => {
+        return uvi.json()
+    }).then(uvIndexFunc);
+    
+    function uvIndexFunc(uvi) {
+        
+        console.log(uvi);
+        let uvindex = document.querySelector('.uvindex ');
+        uvindex.innerText = "UV Index " + uvi.value;
+    }
+
 }
