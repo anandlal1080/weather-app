@@ -36,15 +36,15 @@ function getResults(query) {
         return weather.json();
         
         
+        
     }).then(displayResults);
     
 }
 
 function displayResults(weather) {
-    lat = weather.coord.lat;
-    lon = weather.coord.lon;
+    
     var iconcode =weather.weather[0].icon;
-    var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
   
     
     let city = document.querySelector('.location .city');
@@ -65,9 +65,9 @@ function displayResults(weather) {
     humidity.innerText = "Humidity " + weather.main.humidity + "%";
 
     let windspeed = document.querySelector('.windspeed');
-    windspeed.innerText = "Windspeed " + weather.wind.speed+ "mph";
+    windspeed.innerText = "Windspeed " + weather.wind.speed+ " mph";
 
-    fetch(`${api.base}uvi?lat=${lat}&lon=${lon}&appid=${api.key}`)
+    fetch(`${api.base}uvi?lat=${weather.coord.lat}&lon=${weather.coord.lon}&appid=${api.key}`)
     .then(uvi => {
         return uvi.json()
     }).then(uvIndexFunc);
@@ -78,4 +78,29 @@ function displayResults(weather) {
         uvindex.innerText = "UV Index " + uvi.value;
     }
 
+    fetch(`${api.base}forecast?q=${weather.name}&units=imperial&APPID=${api.key}`)
+    .then(forecast => {
+        return forecast.json();
+        
+        
+        
+    }).then(fiveDay);
+
+}
+
+
+function fiveDay(forecast) {
+    
+    for (let i = 6; i < 40; i+=8){
+        
+        var iconcode =forecast.list[i].weather[0].icon;
+        var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
+        $('#wicon' + [i]).attr('src', iconurl);
+        $('.temp' + [i]).text((`${Math.round(forecast.list[i].main.temp)}`) + " F");
+        $('.humidity' + [i]).text((forecast.list[i].main.humidity) + " %");
+        var date = forecast.list[i].dt_txt;
+        date = date.split(" ");
+        $('#date' + [i]).text((date[0]));
+    }
+    
 }
