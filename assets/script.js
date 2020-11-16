@@ -9,12 +9,13 @@ var lat = "";
 var lon = "";
 var previousSearch = JSON.parse(localStorage.getItem("previous")) || [];
 
-getResults(previousSearch[previousSearch.length-1]);
+if (previousSearch.length >0) {
+    
+    getResults(previousSearch[previousSearch.length-1]);
+}
 
 for (let i = 0; i < previousSearch.length; i++) {
-    //     h5 = document.createElement("h5");
-    // history = document.querySelector("#history")
-    // history.h5;
+   
     $("#history").prepend($("<h5>").text(previousSearch[i]));
     
     function history(e) {
@@ -27,15 +28,7 @@ for (let i = 0; i < previousSearch.length; i++) {
     $(document).on("click", history)
     
 }
-// $(document).on("click", history)
 
-// previousSearch.forEach(function(city){
-//     h5 = document.createElement("h5");
-//     history = document.querySelector("#history")
-//     history.h5;
-//     // $("#history").prepend($("<h5>").text(city));
-    
-// });
 
 
 function setQuery(evt) {
