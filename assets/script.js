@@ -119,20 +119,22 @@ function displayResults(weather) {
 }
 
 
+
 function fiveDay(forecast) {
-    
-    for (let i = 6; i < 40; i+=8){
-        
+    let count = 1;
+    for (let i = 0; i < forecast.list.length; i++) {
+        if (forecast.list[i].dt_txt.includes("12:00:00")) {
         var iconcode =forecast.list[i].weather[0].icon;
         var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
-        $('#wicon' + [i]).attr('src', iconurl);
-        $('.temp' + [i]).text((`${Math.round(forecast.list[i].main.temp)}`) + " F");
-        $('.humidity' + [i]).text((forecast.list[i].main.humidity) + " %");
+        $('#wicon' + [count]).attr('src', iconurl);
+        $('.temp' + [count]).text((`${Math.round(forecast.list[i].main.temp)}`) + " F");
+        $('.humidity' + [count]).text((forecast.list[i].main.humidity) + " %");
         var date = forecast.list[i].dt_txt;
         date = date.split(" ");
-        $('#date' + [i]).text((date[0]));
+        $('#date' + [count]).text((date[0]));
+        count++;
+        console.log(forecast.list[i]);
+        }
+        
     }
-    
 }
-
-
