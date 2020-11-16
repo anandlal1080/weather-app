@@ -29,10 +29,8 @@ for (let i = 0; i < previousSearch.length; i++) {
     
 }
 
-
-
 function setQuery(evt) {
-    
+  
     
     if (evt.keyCode == 13) {
         if (searchbox.value == "") {
